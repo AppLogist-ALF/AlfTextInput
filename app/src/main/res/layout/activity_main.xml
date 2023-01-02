@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.activity.TextInputActivity">
+
+    <com.applogist.alftextinput.AlfTextInput
+        android:id="@+id/alfEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:helperText="text"
+        app:inputType="text" />
+
+    <com.applogist.alftextinput.AlfTextInput
+        android:id="@+id/alfEditTextPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:helperText="phone"
+        app:inputType="phone" />
+
+    <com.applogist.alftextinput.AlfTextInput
+        android:id="@+id/alfEditTextMail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:helperText="email"
+        app:inputType="email" />
+
+    <com.applogist.alftextinput.AlfTextInput
+        android:id="@+id/alfEditTextRegex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:isRegex="true" />
+
+</LinearLayout>
