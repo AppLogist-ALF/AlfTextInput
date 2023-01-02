@@ -40,7 +40,7 @@ afterEvaluate {
             release(MavenPublication) {
                 from components.release
 
-                groupId = 'com.applogist.alftextinput'
+                groupId = 'com.applogist.alf'
                 artifactId = 'alf-text-input'
                 version = '1.0.0'
             }

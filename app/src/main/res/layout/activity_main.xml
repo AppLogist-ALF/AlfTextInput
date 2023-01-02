@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.activity.TextInputActivity">
+    tools:context=".MainActivity">
 
-    <com.applogist.alftextinput.AlfTextInput
+    <com.applogist.alf_text_input.AlfTextInput
         android:id="@+id/alfEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,7 +15,7 @@
         app:helperText="text"
         app:inputType="text" />
 
-    <com.applogist.alftextinput.AlfTextInput
+    <com.applogist.alf_text_input.AlfTextInput
         android:id="@+id/alfEditTextPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
         app:helperText="phone"
         app:inputType="phone" />
 
-    <com.applogist.alftextinput.AlfTextInput
+    <com.applogist.alf_text_input.AlfTextInput
         android:id="@+id/alfEditTextMail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -31,7 +31,7 @@
         app:helperText="email"
         app:inputType="email" />
 
-    <com.applogist.alftextinput.AlfTextInput
+    <com.applogist.alf_text_input.AlfTextInput
         android:id="@+id/alfEditTextRegex"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

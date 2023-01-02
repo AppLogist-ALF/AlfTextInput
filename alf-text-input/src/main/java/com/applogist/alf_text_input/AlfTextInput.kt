@@ -1,4 +1,4 @@
-package com.applogist.alftextinput
+package com.applogist.alf_text_input
 
 import android.content.Context
 import android.text.TextUtils
