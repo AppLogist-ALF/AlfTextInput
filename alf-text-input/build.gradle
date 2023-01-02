@@ -41,9 +41,9 @@ afterEvaluate {
             release(MavenPublication) {
                 from components.release
 
-                groupId = 'com.applogist.alf'
+                groupId = 'com.applogist'
                 artifactId = 'alf-text-input'
-                version = '1.0.1'
+                version = '1.0.3'
             }
         }
     }
