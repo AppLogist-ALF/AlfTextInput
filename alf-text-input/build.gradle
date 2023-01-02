@@ -43,7 +43,7 @@ afterEvaluate {
 
                 groupId = 'com.applogist.alf'
                 artifactId = 'alf-text-input'
-                version = '1.0.0'
+                version = '1.0.1'
             }
         }
     }
