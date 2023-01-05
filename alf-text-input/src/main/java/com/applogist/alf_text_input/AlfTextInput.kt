@@ -21,6 +21,8 @@ class AlfTextInput @JvmOverloads constructor(
     private var text: CharSequence? = null
     private var hint: CharSequence? = null
     private var helperText: CharSequence? = null
+    private var placeHolderText: CharSequence? = null
+    private var titleText: CharSequence? = null
     private var regex: String? = null
     private var regexMessage: String? = null
     private var inputType: Int = 0
@@ -42,6 +44,8 @@ class AlfTextInput @JvmOverloads constructor(
             text = ta.getText(R.styleable.ALEditText_text)
             hint = ta.getText(R.styleable.ALEditText_hint)
             helperText = ta.getText(R.styleable.ALEditText_helperText)
+            placeHolderText = ta.getText(R.styleable.ALEditText_placeHolderText)
+            titleText = ta.getText(R.styleable.ALEditText_titleText)
             inputType = ta.getInt(R.styleable.ALEditText_inputType, 0)
             regex = ta.getString(R.styleable.ALEditText_isRegex)
             regexMessage = ta.getString(R.styleable.ALEditText_regexMessage)
@@ -57,6 +61,8 @@ class AlfTextInput @JvmOverloads constructor(
             inputEditText.hint = hint
             inputLayout.helperText = helperText
             inputEditText.setTextColor(textColor)
+            inputLayout.hint = titleText
+            inputLayout.placeholderText = placeHolderText
 
             inputEditText.inputType = when (inputType) {
                 InputType.TYPE_TEXT -> android.text.InputType.TYPE_CLASS_TEXT
@@ -111,6 +117,16 @@ class AlfTextInput @JvmOverloads constructor(
     fun setHelperText(helperText: String) {
         this.helperText = helperText
         inputLayout.helperText = helperText
+    }
+
+    fun setTitleText(title: String) {
+        this.titleText = title
+        inputLayout.hint = titleText
+    }
+
+    fun setPlaceHolderText(placeHolderText: String) {
+        this.placeHolderText = placeHolderText
+        inputLayout.placeholderText = placeHolderText
     }
 
     fun setRegex(regex: String) {
