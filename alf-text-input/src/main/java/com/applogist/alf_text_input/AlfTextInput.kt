@@ -103,13 +103,13 @@ class AlfTextInput @JvmOverloads constructor(
         }
     }
 
-    fun getText(): Editable? {
-        return inputEditText.text
-    }
-
     fun setText(text: String) {
         this.text = text
         inputEditText.setText(text)
+    }
+
+    fun getText(): Editable? {
+        return inputEditText.text
     }
 
     fun setHint(hint: String) {
@@ -117,9 +117,17 @@ class AlfTextInput @JvmOverloads constructor(
         inputEditText.hint = hint
     }
 
+    fun getHint(): CharSequence? {
+        return inputEditText.hint
+    }
+
     fun setHelperText(helperText: String) {
         this.helperText = helperText
         inputLayout.helperText = helperText
+    }
+
+    fun getHelperText(): CharSequence? {
+        return inputLayout.helperText
     }
 
     fun setTitleText(title: String) {
@@ -127,22 +135,42 @@ class AlfTextInput @JvmOverloads constructor(
         inputLayout.hint = titleText
     }
 
+    fun getTitleText(): CharSequence? {
+        return inputLayout.hint
+    }
+
     fun setPlaceHolderText(placeHolderText: String) {
         this.placeHolderText = placeHolderText
         inputLayout.placeholderText = placeHolderText
+    }
+
+    fun getPlaceHolderText(): CharSequence? {
+        return inputLayout.placeholderText
     }
 
     fun setRegex(regex: String) {
         this.regex = regex
     }
 
+    fun getRegex(): String? {
+        return this.regex
+    }
+
     fun setRegexMessage(message: String) {
-        regexMessage = message
+        this.regexMessage = message
+    }
+
+    fun getRegexMessage(): String? {
+        return this.regexMessage
     }
 
     fun setTextColor(color: Int) {
         this.textColor = color
         inputEditText.setTextColor(textColor)
+    }
+
+    fun getTextColor(): Int {
+        return inputEditText.currentTextColor
     }
 
     fun setLayoutColor(color: Int) {
