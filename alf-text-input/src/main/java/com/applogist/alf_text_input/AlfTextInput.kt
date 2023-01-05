@@ -1,6 +1,7 @@
 package com.applogist.alf_text_input
 
 import android.content.Context
+import android.text.Editable
 import android.text.TextUtils
 import android.util.AttributeSet
 import android.util.Patterns
@@ -16,7 +17,7 @@ class AlfTextInput @JvmOverloads constructor(
 
 
     private lateinit var inputLayout: TextInputLayout
-     private lateinit var inputEditText: TextInputEditText
+    private lateinit var inputEditText: TextInputEditText
 
     private var text: CharSequence? = null
     private var hint: CharSequence? = null
@@ -51,11 +52,9 @@ class AlfTextInput @JvmOverloads constructor(
             regexMessage = ta.getString(R.styleable.ALEditText_regexMessage)
             textColor =
                 ta.getColor(R.styleable.ALEditText_textColor, context.getColor(R.color.black))
-            layoutColor =
-                ta.getColor(
-                    R.styleable.ALEditText_layoutColor,
-                    context.getColor(R.color.purple_200)
-                )
+            layoutColor = ta.getColor(
+                R.styleable.ALEditText_layoutColor, context.getColor(R.color.purple_200)
+            )
 
             inputEditText.setText(text)
             inputEditText.hint = hint
@@ -102,6 +101,10 @@ class AlfTextInput @JvmOverloads constructor(
         } finally {
             ta.recycle()
         }
+    }
+
+    fun getText(): Editable? {
+        return inputEditText.text
     }
 
     fun setText(text: String) {
