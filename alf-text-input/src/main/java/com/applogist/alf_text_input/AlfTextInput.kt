@@ -2,9 +2,8 @@ package com.applogist.alf_text_input
 
 import android.content.Context
 import android.text.Editable
-import android.text.TextUtils
 import android.util.AttributeSet
-import android.util.Patterns
+import android.util.TypedValue
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.widget.doAfterTextChanged
@@ -28,7 +27,8 @@ class AlfTextInput @JvmOverloads constructor(
     private var regexMessage: String? = null
     private var inputType: Int = 0
     private var textColor: Int = 0
-    private var layoutColor: Int = 0
+    private var bgColor: Int = 0
+    private var borderColor: Int = 0
 
     init {
         init(attrs)
@@ -39,35 +39,42 @@ class AlfTextInput @JvmOverloads constructor(
         inputLayout = findViewById(R.id.textInputLayout)
         inputEditText = findViewById(R.id.textInputEditText)
 
-        val ta = context.obtainStyledAttributes(attrs, R.styleable.ALEditText)
+        val ta = context.obtainStyledAttributes(attrs, R.styleable.AlfTextInput,0,0)
 
         try {
-            text = ta.getText(R.styleable.ALEditText_text)
-            hint = ta.getText(R.styleable.ALEditText_hint)
-            helperText = ta.getText(R.styleable.ALEditText_helperText)
-            placeHolderText = ta.getText(R.styleable.ALEditText_placeHolderText)
-            titleText = ta.getText(R.styleable.ALEditText_titleText)
-            inputType = ta.getInt(R.styleable.ALEditText_inputType, 0)
-            regex = ta.getString(R.styleable.ALEditText_isRegex)
-            regexMessage = ta.getString(R.styleable.ALEditText_regexMessage)
-            textColor =
-                ta.getColor(R.styleable.ALEditText_textColor, context.getColor(R.color.black))
-            layoutColor = ta.getColor(
-                R.styleable.ALEditText_layoutColor, context.getColor(R.color.purple_200)
+            text = ta.getText(R.styleable.AlfTextInput_text)
+            hint = ta.getText(R.styleable.AlfTextInput_hint)
+            helperText = ta.getText(R.styleable.AlfTextInput_helperText)
+            placeHolderText = ta.getText(R.styleable.AlfTextInput_placeHolderText)
+            titleText = ta.getText(R.styleable.AlfTextInput_titleText)
+            inputType = ta.getInt(R.styleable.AlfTextInput_inputType, 0)
+            regex = ta.getString(R.styleable.AlfTextInput_isRegex)
+            regexMessage = ta.getString(R.styleable.AlfTextInput_regexMessage)
+            textColor = ta.getColor(
+                R.styleable.AlfTextInput_textColor, getThemeColor(android.R.attr.colorPrimary)
+            )
+            bgColor = ta.getColor(
+                R.styleable.AlfTextInput_backgroundColor, inputLayout.boxBackgroundColor
+            )
+
+            borderColor = ta.getColor(
+                R.styleable.AlfTextInput_borderColor, getThemeColor(android.R.attr.colorPrimary)
             )
 
             inputEditText.setText(text)
             inputEditText.hint = hint
             inputLayout.helperText = helperText
-            inputEditText.setTextColor(textColor)
             inputLayout.hint = titleText
             inputLayout.placeholderText = placeHolderText
+            inputEditText.setTextColor(textColor)
+            inputLayout.boxBackgroundColor = bgColor
+            inputLayout.boxStrokeColor = borderColor
 
             inputEditText.inputType = when (inputType) {
                 InputType.TYPE_TEXT -> android.text.InputType.TYPE_CLASS_TEXT
                 InputType.TYPE_PHONE -> android.text.InputType.TYPE_CLASS_PHONE
                 InputType.TYPE_MAIL -> android.text.InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
-                InputType.TYPE_PASSWORD -> android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
+                InputType.TYPE_PASSWORD -> android.text.InputType.TYPE_CLASS_TEXT or android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
                 InputType.TYPE_NUMBER -> android.text.InputType.TYPE_CLASS_NUMBER
                 else -> android.text.InputType.TYPE_CLASS_TEXT
             }
@@ -173,22 +180,33 @@ class AlfTextInput @JvmOverloads constructor(
         return inputEditText.currentTextColor
     }
 
-    fun setLayoutColor(color: Int) {
-        this.layoutColor = color
-        //setlaycolor
+    fun setBgColor(color: Int) {
+        this.bgColor = color
+        inputLayout.boxBackgroundColor = bgColor
     }
 
-    private fun isRegexValid(text: String, regex: Regex): Boolean {
-        return text.matches(regex)
+    fun getBgColor(): Int {
+        return inputLayout.boxBackgroundColor
     }
 
-    private fun isValidEmail(email: String): Boolean {
-        return !TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    fun setBorderColor(color: Int) {
+        this.borderColor = color
+        inputLayout.boxStrokeColor = borderColor
     }
 
-    private fun isValidPhoneNumber(number: String): Boolean {
-        return Patterns.PHONE.matcher(number).matches()
+    fun getBorderColor(): Int {
+        return inputLayout.boxStrokeColor
     }
 
+    fun setErrorMessage(message: String?) {
+        inputLayout.error = message
+    }
+
+
+    private fun getThemeColor(colorId: Int): Int {
+        val value = TypedValue()
+        context.theme.resolveAttribute(colorId, value, true)
+        return value.data
+    }
 
 }

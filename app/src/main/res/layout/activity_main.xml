@@ -38,4 +38,25 @@
         android:layout_margin="10dp"
         app:isRegex="true" />
 
+    <com.applogist.alf_text_input.AlfTextInput
+        android:id="@+id/alfEditTextPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:helperText="password"
+        app:inputType="password" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:boxBackgroundColor="@color/teal_200"
+        app:boxStrokeColor="@android:color/holo_green_dark"
+        app:hintTextColor="@android:color/holo_red_dark">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
 </LinearLayout>
