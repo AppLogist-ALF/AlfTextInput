@@ -3,7 +3,7 @@
 
     <declare-styleable name="AlfTextInput">
         <attr name="isRegex" format="boolean" />
-        <attr name="regexMessage" format="string" />
+        <attr name="errorMessage" format="string" />
         <attr name="text" format="string" />
         <attr name="hint" format="string" />
         <attr name="helperText" format="string" />

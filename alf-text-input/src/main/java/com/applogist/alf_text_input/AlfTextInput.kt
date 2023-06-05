@@ -27,7 +27,7 @@ class AlfTextInput @JvmOverloads constructor(
     private var placeHolderText: CharSequence? = null
     private var titleText: CharSequence? = null
     private var regex: String? = null
-    private var regexMessage: String? = null
+    private var errorMessage: String? = null
     private var inputType: Int = 0
     private var textColor: Int = 0
     private var bgColor: Int = 0
@@ -52,16 +52,18 @@ class AlfTextInput @JvmOverloads constructor(
             titleText = ta.getText(R.styleable.AlfTextInput_titleText)
             inputType = ta.getInt(R.styleable.AlfTextInput_inputType, 0)
             regex = ta.getString(R.styleable.AlfTextInput_isRegex)
-            regexMessage = ta.getString(R.styleable.AlfTextInput_regexMessage)
+            errorMessage = ta.getString(R.styleable.AlfTextInput_errorMessage)
             textColor = ta.getColor(
-                R.styleable.AlfTextInput_textColor, ContextCompat.getColor(context,android.R.color.black)
+                R.styleable.AlfTextInput_textColor,
+                ContextCompat.getColor(context, android.R.color.black)
             )
             bgColor = ta.getColor(
                 R.styleable.AlfTextInput_backgroundColor, inputLayout.boxBackgroundColor
             )
 
             borderColor = ta.getColor(
-                R.styleable.AlfTextInput_borderColor, ContextCompat.getColor(context,android.R.color.black)
+                R.styleable.AlfTextInput_borderColor,
+                ContextCompat.getColor(context, android.R.color.black)
             )
 
             inputEditText.setText(text)
@@ -83,13 +85,13 @@ class AlfTextInput @JvmOverloads constructor(
                 else -> android.text.InputType.TYPE_CLASS_TEXT
             }
 
-            if (inputType == InputType.TYPE_PASSWORD)
-                inputLayout.endIconMode = END_ICON_PASSWORD_TOGGLE
+            if (inputType == InputType.TYPE_PASSWORD) inputLayout.endIconMode =
+                END_ICON_PASSWORD_TOGGLE
 
             inputEditText.doAfterTextChanged {
                 regex?.let {
                     if (!isRegexValid(inputEditText.text.toString(), Regex(it))) {
-                        inputLayout.error = regexMessage ?: "Regex uyumlu değil!"
+                        inputLayout.error = errorMessage ?: "Regex uyumlu değil!"
                     } else {
                         inputLayout.error = null
                         inputLayout.isErrorEnabled = false
@@ -98,7 +100,8 @@ class AlfTextInput @JvmOverloads constructor(
                     when (inputType) {
                         InputType.TYPE_PHONE -> {
                             if (!isValidPhoneNumber(inputEditText.text.toString())) {
-                                inputLayout.error = "Geçerli bir telefon numarası giriniz!"
+                                inputLayout.error =
+                                    errorMessage ?: "Geçerli bir telefon numarası giriniz!"
                             } else {
                                 inputLayout.error = null
                                 inputLayout.isErrorEnabled = false
@@ -107,7 +110,8 @@ class AlfTextInput @JvmOverloads constructor(
 
                         InputType.TYPE_MAIL -> {
                             if (!isValidEmail(inputEditText.text.toString())) {
-                                inputLayout.error = "Geçerli br mail adresi giriniz!"
+                                inputLayout.error =
+                                    errorMessage ?: "Geçerli br mail adresi giriniz!"
                             } else {
                                 inputLayout.error = null
                                 inputLayout.isErrorEnabled = false
@@ -174,12 +178,12 @@ class AlfTextInput @JvmOverloads constructor(
         return this.regex
     }
 
-    fun setRegexMessage(message: String) {
-        this.regexMessage = message
+    fun setErrorMessage(message: String) {
+        this.errorMessage = message
     }
 
-    fun getRegexMessage(): String? {
-        return this.regexMessage
+    fun getErrorMessage(): String? {
+        return this.errorMessage
     }
 
     fun setTextColor(color: Int) {
