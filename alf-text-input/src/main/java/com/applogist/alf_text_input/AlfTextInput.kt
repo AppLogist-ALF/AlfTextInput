@@ -1,11 +1,13 @@
 package com.applogist.alf_text_input
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.text.Editable
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -52,14 +54,14 @@ class AlfTextInput @JvmOverloads constructor(
             regex = ta.getString(R.styleable.AlfTextInput_isRegex)
             regexMessage = ta.getString(R.styleable.AlfTextInput_regexMessage)
             textColor = ta.getColor(
-                R.styleable.AlfTextInput_textColor, getThemeColor(android.R.attr.colorPrimary)
+                R.styleable.AlfTextInput_textColor, ContextCompat.getColor(context,android.R.color.black)
             )
             bgColor = ta.getColor(
                 R.styleable.AlfTextInput_backgroundColor, inputLayout.boxBackgroundColor
             )
 
             borderColor = ta.getColor(
-                R.styleable.AlfTextInput_borderColor, getThemeColor(android.R.attr.colorPrimary)
+                R.styleable.AlfTextInput_borderColor, ContextCompat.getColor(context,android.R.color.black)
             )
 
             inputEditText.setText(text)
@@ -70,6 +72,7 @@ class AlfTextInput @JvmOverloads constructor(
             inputEditText.setTextColor(textColor)
             inputLayout.boxBackgroundColor = bgColor
             inputLayout.boxStrokeColor = borderColor
+            inputLayout.hintTextColor = ColorStateList.valueOf(borderColor)
 
             inputEditText.inputType = when (inputType) {
                 InputType.TYPE_TEXT -> android.text.InputType.TYPE_CLASS_TEXT

@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         app:helperText="text"
+        app:titleText="title"
         app:inputType="text" />
 
     <com.applogist.alf_text_input.AlfTextInput
