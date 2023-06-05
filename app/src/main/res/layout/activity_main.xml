@@ -50,7 +50,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        app:boxBackgroundColor="@color/teal_200"
         app:boxStrokeColor="@android:color/holo_green_dark"
         app:hintTextColor="@android:color/holo_red_dark">
 

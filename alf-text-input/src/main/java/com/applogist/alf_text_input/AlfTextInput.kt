@@ -9,6 +9,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.widget.doAfterTextChanged
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.google.android.material.textfield.TextInputLayout.END_ICON_PASSWORD_TOGGLE
 
 class AlfTextInput @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -39,7 +40,7 @@ class AlfTextInput @JvmOverloads constructor(
         inputLayout = findViewById(R.id.textInputLayout)
         inputEditText = findViewById(R.id.textInputEditText)
 
-        val ta = context.obtainStyledAttributes(attrs, R.styleable.AlfTextInput,0,0)
+        val ta = context.obtainStyledAttributes(attrs, R.styleable.AlfTextInput, 0, 0)
 
         try {
             text = ta.getText(R.styleable.AlfTextInput_text)
@@ -79,6 +80,9 @@ class AlfTextInput @JvmOverloads constructor(
                 else -> android.text.InputType.TYPE_CLASS_TEXT
             }
 
+            if (inputType == InputType.TYPE_PASSWORD)
+                inputLayout.endIconMode = END_ICON_PASSWORD_TOGGLE
+
             inputEditText.doAfterTextChanged {
                 regex?.let {
                     if (!isRegexValid(inputEditText.text.toString(), Regex(it))) {
@@ -95,6 +99,7 @@ class AlfTextInput @JvmOverloads constructor(
                                 inputLayout.error = null
                             }
                         }
+
                         InputType.TYPE_MAIL -> {
                             if (!isValidEmail(inputEditText.text.toString())) {
                                 inputLayout.error = "Geçerli br mail adresi giriniz!"
