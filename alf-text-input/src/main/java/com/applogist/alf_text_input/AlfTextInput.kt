@@ -115,6 +115,12 @@ class AlfTextInput @JvmOverloads constructor(
                                 inputLayout.isErrorEnabled = false
                             }
                         }
+                        else ->{
+                            if (!inputEditText.text.isNullOrEmpty()){
+                                inputLayout.error = null
+                                inputLayout.isErrorEnabled = false
+                            }
+                        }
                     }
                 }
             }
