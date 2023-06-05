@@ -92,6 +92,7 @@ class AlfTextInput @JvmOverloads constructor(
                         inputLayout.error = regexMessage ?: "Regex uyumlu değil!"
                     } else {
                         inputLayout.error = null
+                        inputLayout.isErrorEnabled = false
                     }
                 } ?: run {
                     when (inputType) {
@@ -100,6 +101,7 @@ class AlfTextInput @JvmOverloads constructor(
                                 inputLayout.error = "Geçerli bir telefon numarası giriniz!"
                             } else {
                                 inputLayout.error = null
+                                inputLayout.isErrorEnabled = false
                             }
                         }
 
@@ -108,6 +110,7 @@ class AlfTextInput @JvmOverloads constructor(
                                 inputLayout.error = "Geçerli br mail adresi giriniz!"
                             } else {
                                 inputLayout.error = null
+                                inputLayout.isErrorEnabled = false
                             }
                         }
                     }

@@ -5,22 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="10dp"
     tools:context=".MainActivity">
 
     <com.applogist.alf_text_input.AlfTextInput
         android:id="@+id/alfEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         app:helperText="text"
-        app:titleText="title"
-        app:inputType="text" />
+        app:inputType="text"
+        app:titleText="title" />
 
     <com.applogist.alf_text_input.AlfTextInput
         android:id="@+id/alfEditTextPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         app:helperText="phone"
         app:inputType="phone" />
 
@@ -28,29 +27,24 @@
         android:id="@+id/alfEditTextMail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        app:helperText="email"
         app:inputType="email" />
 
     <com.applogist.alf_text_input.AlfTextInput
         android:id="@+id/alfEditTextRegex"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         app:isRegex="true" />
 
     <com.applogist.alf_text_input.AlfTextInput
         android:id="@+id/alfEditTextPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         app:helperText="password"
         app:inputType="password" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         app:boxStrokeColor="@android:color/holo_green_dark"
         app:hintTextColor="@android:color/holo_red_dark">
 
