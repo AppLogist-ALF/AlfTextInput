@@ -85,8 +85,8 @@ class AlfTextInput @JvmOverloads constructor(
                 else -> android.text.InputType.TYPE_CLASS_TEXT
             }
 
-            if (inputType == InputType.TYPE_PASSWORD) inputLayout.endIconMode =
-                END_ICON_PASSWORD_TOGGLE
+            if (inputType == InputType.TYPE_PASSWORD)
+                inputLayout.endIconMode = END_ICON_PASSWORD_TOGGLE
 
             inputEditText.doAfterTextChanged {
                 regex?.let {
@@ -100,8 +100,7 @@ class AlfTextInput @JvmOverloads constructor(
                     when (inputType) {
                         InputType.TYPE_PHONE -> {
                             if (!isValidPhoneNumber(inputEditText.text.toString())) {
-                                inputLayout.error =
-                                    errorMessage ?: "Geçerli bir telefon numarası giriniz!"
+                                inputLayout.error = "Geçerli bir telefon numarası giriniz!"
                             } else {
                                 inputLayout.error = null
                                 inputLayout.isErrorEnabled = false
@@ -110,8 +109,7 @@ class AlfTextInput @JvmOverloads constructor(
 
                         InputType.TYPE_MAIL -> {
                             if (!isValidEmail(inputEditText.text.toString())) {
-                                inputLayout.error =
-                                    errorMessage ?: "Geçerli br mail adresi giriniz!"
+                                inputLayout.error = "Geçerli br mail adresi giriniz!"
                             } else {
                                 inputLayout.error = null
                                 inputLayout.isErrorEnabled = false
@@ -178,8 +176,15 @@ class AlfTextInput @JvmOverloads constructor(
         return this.regex
     }
 
-    fun setErrorMessage(message: String) {
+    fun setErrorMessage(message: String?) {
         this.errorMessage = message
+
+        if (message.isNullOrEmpty()) {
+            inputLayout.error = null
+            inputLayout.isErrorEnabled = false
+        } else {
+            inputLayout.error = message
+        }
     }
 
     fun getErrorMessage(): String? {
@@ -212,11 +217,6 @@ class AlfTextInput @JvmOverloads constructor(
     fun getBorderColor(): Int {
         return inputLayout.boxStrokeColor
     }
-
-    fun setErrorMessage(message: String?) {
-        inputLayout.error = message
-    }
-
 
     private fun getThemeColor(colorId: Int): Int {
         val value = TypedValue()
