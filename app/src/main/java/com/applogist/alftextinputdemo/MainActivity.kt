@@ -19,5 +19,6 @@ class MainActivity : AppCompatActivity() {
             )
 
         }
+        //findViewById<AlfTextInput>(R.id.alfEditText).setText("32312")
     }
 }

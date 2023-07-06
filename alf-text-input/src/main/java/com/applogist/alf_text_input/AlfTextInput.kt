@@ -27,6 +27,7 @@ class AlfTextInput @JvmOverloads constructor(
     private var placeHolderText: CharSequence? = null
     private var titleText: CharSequence? = null
     private var regex: String? = null
+    private var enabled: Boolean = true
     private var errorMessage: String? = null
     private var inputType: Int = 0
     private var textColor: Int = 0
@@ -52,6 +53,7 @@ class AlfTextInput @JvmOverloads constructor(
             titleText = ta.getText(R.styleable.AlfTextInput_titleText)
             inputType = ta.getInt(R.styleable.AlfTextInput_inputType, 0)
             regex = ta.getString(R.styleable.AlfTextInput_isRegex)
+            enabled = ta.getBoolean(R.styleable.AlfTextInput_enabled, true)
             errorMessage = ta.getString(R.styleable.AlfTextInput_errorMessage)
             textColor = ta.getColor(
                 R.styleable.AlfTextInput_textColor,
@@ -75,6 +77,7 @@ class AlfTextInput @JvmOverloads constructor(
             inputLayout.boxBackgroundColor = bgColor
             inputLayout.boxStrokeColor = borderColor
             inputLayout.hintTextColor = ColorStateList.valueOf(borderColor)
+            inputLayout.isEnabled = enabled
 
             inputEditText.inputType = when (inputType) {
                 InputType.TYPE_TEXT -> android.text.InputType.TYPE_CLASS_TEXT
@@ -115,8 +118,9 @@ class AlfTextInput @JvmOverloads constructor(
                                 inputLayout.isErrorEnabled = false
                             }
                         }
-                        else ->{
-                            if (!inputEditText.text.isNullOrEmpty()){
+
+                        else -> {
+                            if (!inputEditText.text.isNullOrEmpty()) {
                                 inputLayout.error = null
                                 inputLayout.isErrorEnabled = false
                             }
