@@ -21,6 +21,7 @@ class AlfTextInput @JvmOverloads constructor(
     private lateinit var inputLayout: TextInputLayout
     private lateinit var inputEditText: TextInputEditText
 
+    private var text: CharSequence? = null
     private var hint: CharSequence? = null
     private var helperText: CharSequence? = null
     private var placeHolderText: CharSequence? = null
@@ -42,95 +43,10 @@ class AlfTextInput @JvmOverloads constructor(
         inputLayout = findViewById(R.id.textInputLayout)
         inputEditText = findViewById(R.id.textInputEditText)
 
-        val ta = context.obtainStyledAttributes(attrs, R.styleable.AlfTextInput, 0, 0)
-
-        try {
-            hint = ta.getText(R.styleable.AlfTextInput_hint)
-            helperText = ta.getText(R.styleable.AlfTextInput_helperText)
-            placeHolderText = ta.getText(R.styleable.AlfTextInput_placeHolderText)
-            titleText = ta.getText(R.styleable.AlfTextInput_titleText)
-            inputType = ta.getInt(R.styleable.AlfTextInput_inputType, 0)
-            regex = ta.getString(R.styleable.AlfTextInput_isRegex)
-            enabled = ta.getBoolean(R.styleable.AlfTextInput_enabled, true)
-            errorMessage = ta.getString(R.styleable.AlfTextInput_errorMessage)
-            textColor = ta.getColor(
-                R.styleable.AlfTextInput_textColor,
-                ContextCompat.getColor(context, android.R.color.black)
-            )
-            bgColor = ta.getColor(
-                R.styleable.AlfTextInput_backgroundColor, inputLayout.boxBackgroundColor
-            )
-
-            borderColor = ta.getColor(
-                R.styleable.AlfTextInput_borderColor,
-                ContextCompat.getColor(context, android.R.color.black)
-            )
-
-            inputEditText.hint = hint
-            inputLayout.helperText = helperText
-            inputLayout.hint = titleText
-            inputLayout.placeholderText = placeHolderText
-            inputEditText.setTextColor(textColor)
-            inputLayout.boxBackgroundColor = bgColor
-            inputLayout.boxStrokeColor = borderColor
-            inputLayout.hintTextColor = ColorStateList.valueOf(borderColor)
-            inputLayout.isEnabled = enabled
-
-            inputEditText.inputType = when (inputType) {
-                InputType.TYPE_TEXT -> android.text.InputType.TYPE_CLASS_TEXT
-                InputType.TYPE_PHONE -> android.text.InputType.TYPE_CLASS_PHONE
-                InputType.TYPE_MAIL -> android.text.InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
-                InputType.TYPE_PASSWORD -> android.text.InputType.TYPE_CLASS_TEXT or android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
-                InputType.TYPE_NUMBER -> android.text.InputType.TYPE_CLASS_NUMBER
-                else -> android.text.InputType.TYPE_CLASS_TEXT
-            }
-
-            if (inputType == InputType.TYPE_PASSWORD)
-                inputLayout.endIconMode = END_ICON_PASSWORD_TOGGLE
-
-            inputEditText.doAfterTextChanged {
-                regex?.let {
-                    if (!isRegexValid(inputEditText.text.toString(), Regex(it))) {
-                        inputLayout.error = errorMessage ?: "Regex uyumlu değil!"
-                    } else {
-                        inputLayout.error = null
-                        inputLayout.isErrorEnabled = false
-                    }
-                } ?: run {
-                    when (inputType) {
-                        InputType.TYPE_PHONE -> {
-                            if (!isValidPhoneNumber(inputEditText.text.toString())) {
-                                inputLayout.error = "Geçerli bir telefon numarası giriniz!"
-                            } else {
-                                inputLayout.error = null
-                                inputLayout.isErrorEnabled = false
-                            }
-                        }
-
-                        InputType.TYPE_MAIL -> {
-                            if (!isValidEmail(inputEditText.text.toString())) {
-                                inputLayout.error = "Geçerli br mail adresi giriniz!"
-                            } else {
-                                inputLayout.error = null
-                                inputLayout.isErrorEnabled = false
-                            }
-                        }
-
-                        else -> {
-                            if (!inputEditText.text.isNullOrEmpty()) {
-                                inputLayout.error = null
-                                inputLayout.isErrorEnabled = false
-                            }
-                        }
-                    }
-                }
-            }
-        } finally {
-            ta.recycle()
-        }
     }
 
     fun setText(text: String) {
+        this.text = text
         inputEditText.setText(text)
     }
 

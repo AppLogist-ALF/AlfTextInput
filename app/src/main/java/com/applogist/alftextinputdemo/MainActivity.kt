@@ -17,7 +17,6 @@ class MainActivity : AppCompatActivity() {
             edittext.setErrorMessage(
                 if (edittext.getText().isNullOrEmpty()) "error message" else null
             )
-
         }
         //findViewById<AlfTextInput>(R.id.alfEditText).setText("32312")
     }
