@@ -21,7 +21,6 @@ class AlfTextInput @JvmOverloads constructor(
     private lateinit var inputLayout: TextInputLayout
     private lateinit var inputEditText: TextInputEditText
 
-    private var text: CharSequence? = null
     private var hint: CharSequence? = null
     private var helperText: CharSequence? = null
     private var placeHolderText: CharSequence? = null
@@ -46,7 +45,6 @@ class AlfTextInput @JvmOverloads constructor(
         val ta = context.obtainStyledAttributes(attrs, R.styleable.AlfTextInput, 0, 0)
 
         try {
-            text = ta.getText(R.styleable.AlfTextInput_text)
             hint = ta.getText(R.styleable.AlfTextInput_hint)
             helperText = ta.getText(R.styleable.AlfTextInput_helperText)
             placeHolderText = ta.getText(R.styleable.AlfTextInput_placeHolderText)
@@ -68,7 +66,6 @@ class AlfTextInput @JvmOverloads constructor(
                 ContextCompat.getColor(context, android.R.color.black)
             )
 
-            inputEditText.setText(text)
             inputEditText.hint = hint
             inputLayout.helperText = helperText
             inputLayout.hint = titleText
@@ -134,7 +131,6 @@ class AlfTextInput @JvmOverloads constructor(
     }
 
     fun setText(text: String) {
-        this.text = text
         inputEditText.setText(text)
     }
 
